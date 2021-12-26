@@ -1,0 +1,36 @@
+name: Backport PR
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  backport:
+    name: BackportPR
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@master
+
+      - name: Backport from master to develop
+        id: bpr
+        uses: cristiammercado/backport-pr@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pr-from-branch: master
+          pr-to-branch: develop
+          pr-title: "backport from master to develop"
+          pr-fail-if-exists: true
+          pr-update-if-exists: true
+          maintainer-can-modify: false
+          draft: false
+          merge-pr-after-created: true
+          merge-method: merge
+
+      - name: Output from action
+          run: |
+            echo "PR Number: ${{ steps.bpr.outputs.pr_number }}"
+            echo "PR URL: ${{ steps.bpr.outputs.pr_url }}"
+            echo "PR SHA: ${{ steps.bpr.outputs.pr_sha }}"
