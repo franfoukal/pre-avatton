@@ -28,9 +28,3 @@ jobs:
           draft: false
           merge-pr-after-created: true
           merge-method: merge
-
-      - name: Output from action
-          run: |
-            echo "PR Number: ${{ steps.bpr.outputs.pr_number }}"
-            echo "PR URL: ${{ steps.bpr.outputs.pr_url }}"
-            echo "PR SHA: ${{ steps.bpr.outputs.pr_sha }}"
