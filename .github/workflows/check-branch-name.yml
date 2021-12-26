@@ -1,0 +1,11 @@
+name: "Test Branch Name"
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+  
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: gitflow
+    steps:
+      - uses: knawat/github-actions-gitflow@v1
